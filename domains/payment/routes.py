@@ -65,17 +65,4 @@ def refund_payment(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing refund: {str(e)}")
 
-@router.get("/test")
-def test_payment_route():
-    # Test the Kafka connection by sending a test event
-    try:
-        test_event = {
-            "message": "Payment route and Kafka connection test"
-        }
-        result = publish_payment_event("payment_test", test_event)
-        if result:
-            return {"message": "Payment route and Kafka connection working"}
-        else:
-            return {"message": "Payment route working but Kafka event publishing failed"}
-    except Exception as e:
-        return {"message": f"Payment route working but Kafka connection failed: {str(e)}"}
+
