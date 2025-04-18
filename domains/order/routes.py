@@ -54,4 +54,5 @@ def delete_order(order_id: int, db: Session = Depends(get_db), request: Request 
     order_service = OrderService(db)
     result = order_service.delete_order(order_id)
     if not result:
-    # No return value for 204 response
+        raise HTTPException(status_code=404, detail="Order not found")
+    return None  # Proper return for 204 No Content response

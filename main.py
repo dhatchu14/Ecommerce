@@ -9,7 +9,10 @@ import logging
 from domains.authentication.routes import router as auth_router
 from domains.customer.routes import router as customer_router
 from domains.inventory.routes import inventory_router
+from domains.inventory.routes import products_router
 from domains.inventory.routes import warehouse_router
+from domains.payment.routes import router as payment_router
+from domains.order.routes import router as order_router
 
 # Import database initialization (only creating tables for authentication)
 from db import create_tables
@@ -21,7 +24,7 @@ logger = logging.getLogger(__name__)
 # Load environment variables
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY", "your_default_secret_key")
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/ecommerce2")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/test2_db")
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -59,7 +62,10 @@ async def root():
 app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
 app.include_router(customer_router, prefix="/customers", tags=["Customers"])
 app.include_router(inventory_router, prefix="/inventory", tags=["Inventory"])
+app.include_router(products_router, prefix="/products", tags=["Products"])
 app.include_router(warehouse_router, prefix="/warehouses", tags=["Warehouses"])
+app.include_router(order_router, prefix="/orders", tags=["Orders"])
+app.include_router(payment_router, prefix="/payments", tags=["Payments"])
 
 
 
