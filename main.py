@@ -7,7 +7,7 @@ import logging
 
 # Import authentication routes
 from domains.authentication.routes import router as auth_router
-
+from domains.customer.routes import router as customer_router
 
 # Import database initialization (only creating tables for authentication)
 from db import create_tables
@@ -55,7 +55,7 @@ async def root():
 
 # Register Authentication Router
 app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
-
+app.include_router(customer_router, prefix="/customers", tags=["Customers"])
 
 
 
