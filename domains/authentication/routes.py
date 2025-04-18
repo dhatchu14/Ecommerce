@@ -31,14 +31,6 @@ def login(request: Request, login_data: LoginUser, db: Session = Depends(get_db)
         print(f"Error in login endpoint: {str(e)}")
         raise
 
-@router.get("/me")
-def get_profile(user: dict = Depends(get_current_user), request: Request = None):
-    try:
-        return JSONResponse(content={"username": user["username"], "email": user["email"]})
-    except Exception as e:
-        print(f"Error getting profile: {str(e)}")
-        return JSONResponse(content={"username": user["username"], "email": user["email"]})
-
 @router.post("/logout")
 def logout(request: Request):
     try:
