@@ -12,7 +12,7 @@ class Address(Base):
     state = Column(String, nullable=False)
     zip_code = Column(String, nullable=False)
 
-    customer = relationship("Customer", back_populates="addresses")
+    
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -24,11 +24,7 @@ class Customer(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean, default=True, nullable=False)
 
-    # Relationships
-    addresses = relationship("Address", back_populates="customer")
-    preferences = relationship("CustomerPreference", back_populates="customer")
-    orders = relationship("Order", back_populates="customer")
-    tracking_orders = relationship("OrderTracking", back_populates="customer")
+ 
 
 class CustomerPreference(Base):
     __tablename__ = "customer_preferences"
@@ -36,5 +32,5 @@ class CustomerPreference(Base):
     customer_id = Column(Integer, ForeignKey("customers.id", ondelete="CASCADE"))
     preference_data = Column(String)
 
-    customer = relationship("Customer", back_populates="preferences")
-    # Removed the order relationship
+    
+    
